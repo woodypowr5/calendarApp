@@ -9,13 +9,13 @@ The project has the following structure:
 
 ## Development server
 
-Client-only dev server: From within the calendar-client/src/main/web directory, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Client-only dev server: From within the calendar-client/src/main/web directory, run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. NOTE: This requires a standard installation of Node.js.
 
 Whole dev server: From within the root directory, run `mvn spring-boot:run` for a dev server.  Navigate to `http://localhost:8080/` to access the main page.
 
 ## Build
 
-Run `mvn clean install` to build the project. This first builds the calendar-client module using npm. NodeJS is not required to be installed prior to this build. Maven will download and install a temporary copy of Node JS v9.11.2 in the working directory. It then packages the client code into a jar. Next it builds the calendar-server module. It then pulls in the compiled client code and includes it in the packaged war file.
+Run `mvn clean install` to build the project. This first builds the calendar-client module using npm. Node.js is not required to be installed prior to this build. Maven will download and install a temporary copy of Node.js v9.11.2 in the working directory. It then packages the client code into a jar. Next it builds the calendar-server module. It then pulls in the compiled client code and includes it in the packaged war file.
 The build artifacts will be stored in the `target/` directory of their respective modules.
 
 ## Running unit tests
