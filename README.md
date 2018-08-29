@@ -1,6 +1,6 @@
 # CalendarApp
 
-Maven 3.x is required to build this project
+Maven 3.x is required to build this project.  
 The project has the following structure:
 
 * calendarApp - parent project  
