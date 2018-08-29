@@ -3,9 +3,9 @@
 Maven 3.x is required to build this project
 The project has the following structure:
 
-  calendarApp - parent project
-    |-calendar-client - module that contains the AngularJS code
-    |-calendar-server - module that contains the Java backend code
+* calendarApp - parent project  
+  * calendar-client - module that contains the AngularJS code  
+  * calendar-server - module that contains the Java backend code  
 
 ## Development server
 
@@ -15,7 +15,7 @@ Whole dev server: From within the root directory, run `mvn spring-boot:run` for 
 
 ## Build
 
-Run `mvn clean install` to build the project. This first builds the calendar-client module using npm. Node.js is not required to be installed prior to this build. Maven will download and install a temporary copy of Node.js v9.11.2 in the working directory. It then packages the client code into a jar. Next it builds the calendar-server module. It then pulls in the compiled client code and includes it in the packaged war file.
+Run `mvn clean install` to build the project. This first builds the calendar-client module using npm. Node.js is not required to be installed prior to this build. Maven will download and install a temporary copy of Node.js v9.11.2 in the working directory. It then packages the client code into a jar. Next it builds the calendar-server module. It then pulls in the compiled client code and includes it in the packaged war file.  
 The build artifacts will be stored in the `target/` directory of their respective modules.
 
 ## Running unit tests
