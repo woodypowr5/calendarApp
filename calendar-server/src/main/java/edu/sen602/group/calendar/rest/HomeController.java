@@ -1,4 +1,4 @@
-package edu.sen602.group.calendarclient.rest;
+package edu.sen602.group.calendar.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
