@@ -32,8 +32,11 @@ public class EventDAO {
 		events.remove(id);
 	}
 	
-	public void replace(Event replacement) {
+	public boolean replace(Event replacement) {
+		Event old = events.get(replacement.getId());
+		if (old == null) return false;
 		events.put(replacement.getId(), replacement);
+		return true;
 	}
 	
 	public Event get(int id) {
