@@ -1,12 +1,12 @@
-package edu.sen602.group.calendarclient;
+package edu.sen602.group.calendar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CalendarClientApplication {
+public class CalendarApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CalendarClientApplication.class, args);
+		SpringApplication.run(CalendarApplication.class, args);
 	}
 }
