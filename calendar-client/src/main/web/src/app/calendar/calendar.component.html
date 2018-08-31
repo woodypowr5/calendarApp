@@ -1,0 +1,8 @@
+<div class="dates-container">
+  <div 
+    class="date-cell"
+    *ngFor="let dateCell of dateCells; let i = index;" 
+  >
+    <div class="calendar-date" *ngIf="dateCells[i] !== null"> {{ dateCells[i].getDate() }} </div>
+  </div>
+</div>

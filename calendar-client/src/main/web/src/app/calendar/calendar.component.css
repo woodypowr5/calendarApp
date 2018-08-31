@@ -1,0 +1,10 @@
+.dates-container{
+    display: flex;
+    flex-wrap: wrap;
+    outline: 1px solid black;
+}
+    .date-cell{
+        width: 14.28%;
+        height: 200px;
+        outline: 1px solid black;
+    }
