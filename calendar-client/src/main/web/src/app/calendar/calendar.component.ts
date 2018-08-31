@@ -14,6 +14,7 @@ export class CalendarComponent implements OnInit {
   private dateCells:  Date[] = Array(this.constants.numDateCells).fill(null);
   private currentDate: Date = new Date();
   private activeDate: Date = new Date();
+  private activeEvents: Event[] = [];
   private offsetForMonth: number;
   private events: Event[] = [];
   private eventSubscriptions: Subscription[] = [];
@@ -80,10 +81,21 @@ export class CalendarComponent implements OnInit {
     this.populateDateCells();
   }
 
-  setActiveDate(index: number): void {
+  setActiveDate(index: number, date: Date): void {
     if (this.activeDate[index] !== null) {
       this.activeDate = this.dateCells[index];
     }
+    this.setActiveEvents(date);
+  }
+
+  setActiveEvents(date: Date) {
+    const daysEvents: Event[] = [];
+    this.events.map(event => {
+      if (this.isSameDay(new Date(event.datetime), date)) {
+        daysEvents.push(event);
+      }
+    });
+    this.activeEvents = daysEvents;
   }
 
   dateHasEvents(date: Date): boolean {

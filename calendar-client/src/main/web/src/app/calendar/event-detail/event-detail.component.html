@@ -1,0 +1,14 @@
+<h1>Event Details</h1>
+<div 
+  class="active-events"
+  *ngFor="let activeEvent of events; let i = index;"
+>
+  
+  <div class="details">
+    <h2 class="name">Name: {{ activeEvent.name }}</h2>
+    <h2 class="name">Location: {{ activeEvent.location }}</h2>
+    <h2 class="name">Date: {{ activeEvent.date }}</h2>
+    <h2 class="name">Time: {{ activeEvent.time }}</h2>
+    <h2 class="name">Duration: {{ activeEvent.duration }} hours</h2>
+  </div>
+</div>  

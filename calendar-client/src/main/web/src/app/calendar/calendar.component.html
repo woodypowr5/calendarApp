@@ -1,32 +1,39 @@
-  {{ curentDate }}
-  
-  <div class="header">
-    <button (click)="prevMonth()">Prev Month</button>
-    {{ constants.months[activeDate.getMonth()] }}
-    {{ activeDate.getDate() }}
-    {{ activeDate.getFullYear() }}
-    <button (click)="nextMonth()">Next Month</button>
-  </div>  
+<div class="calendar-display-container">  
+  <div class="calendar-view">
+    <div class="header">
+      <button (click)="prevMonth()">Prev Month</button>
+      {{ constants.months[activeDate.getMonth()] }}
+      {{ activeDate.getDate() }}
+      {{ activeDate.getFullYear() }}
+      <button (click)="nextMonth()">Next Month</button>
+    </div>  
 
-  <div class="dates-container">
-    <div 
-      class="date-cell"
-      *ngFor="let dateCell of dateCells; let i = index;" 
-    >
+    <div class="dates-container">
       <div 
-        class="calendar-date"
-        (click)="setActiveDate(i)"
-        [ngClass]="{'active': activeDate.getDate() + offsetForMonth  === i, 'today': currentDate.getDate() + offsetForMonth  === i}" 
-        *ngIf="dateCells[i] !== null"
+        class="date-cell"
+        *ngFor="let dateCell of dateCells; let i = index;" 
       >
         <div 
-          class="calendar-date-text" 
-        > {{ dateCells[i].getDate() }} </div>
-        <div class="event" *ngIf="dateHasEvents(dateCells[i])">
-          Event!
-        </div>
-      </div>  
+          class="calendar-date"
+          (click)="setActiveDate(i, dateCell)"
+          [ngClass]="{'active': activeDate.getDate() + offsetForMonth  === i, 'today': currentDate.getDate() + offsetForMonth  === i}" 
+          *ngIf="dateCells[i] !== null"
+        >
+          <div 
+            class="calendar-date-text" 
+          > {{ dateCells[i].getDate() }} </div>
+          <div class="event" *ngIf="dateHasEvents(dateCells[i])">
+            Events Today
+          </div>
+        </div>  
+      </div>
     </div>
   </div>
+  <div class="event-detail-view">
+    <app-event-detail
+      [events]="activeEvents"
+    >
+    </app-event-detail>
 
-  
+  </div>
+</div>  
