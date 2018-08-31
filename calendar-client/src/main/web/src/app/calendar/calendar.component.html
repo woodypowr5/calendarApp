@@ -31,6 +31,7 @@
   </div>
   <div class="event-detail-view">
     <app-event-detail
+    (editEvent)="updateEvent($event)"
       [events]="activeEvents"
     >
     </app-event-detail>

@@ -12,6 +12,7 @@ export class EventService {
   public eventsChanged: BehaviorSubject<Event[]> = new BehaviorSubject(null);
 
   constructor() {
+    this.events = MockData.events;
     this.eventsChanged.next(MockData.events);
   }
 
@@ -24,9 +25,9 @@ export class EventService {
     this.events.map((currentEvent, index) => {
       if (currentEvent.id === event.id) {
         this.events.splice(index, 1);
+        this.events.push(event);
       }
     });
-    this.events.push(event);
     this.eventsChanged.next(this.events);
   }
 

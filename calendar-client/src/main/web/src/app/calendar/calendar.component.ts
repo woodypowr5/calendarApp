@@ -116,6 +116,10 @@ export class CalendarComponent implements OnInit {
 
   getFormattedTime(datetime: string): string {
     const date = new Date(datetime);
-    return '' + date.getHours() + ':' + date.getMinutes();
+    return '' + date.getHours();
+  }
+
+  updateEvent(event: Event) {
+    this.eventService.updateEvent(event);
   }
 }

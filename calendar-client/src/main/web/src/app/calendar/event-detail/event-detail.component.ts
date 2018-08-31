@@ -1,5 +1,5 @@
 import { Event } from './../../types/event';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class EventDetailComponent implements OnInit {
   @Input() events: Event[];
+  @Output() createEvent: EventEmitter<Event> = new EventEmitter();
+  @Output() editEvent: EventEmitter<Event> = new EventEmitter();
   private editEventForm: FormGroup;
   private createEventForm: FormGroup;
   private editingEvent: Event = null;
@@ -40,7 +42,10 @@ export class EventDetailComponent implements OnInit {
       notes: this.editingEvent.notes,
       duration: this.editingEvent.duration
     };
-    const formattedDatetime = this.formatDatetime(this.editEventForm.get('time').value);
+    if (this.editEventForm.get('time').value !== null) {
+      const formattedDatetime = this.formatDatetime(newEvent, this.editEventForm.get('time').value);
+      newEvent.datetime = formattedDatetime;
+    }
     if (this.editEventForm.get('name').value !== null) {
       newEvent.name = this.editEventForm.get('name').value;
     }
@@ -53,12 +58,16 @@ export class EventDetailComponent implements OnInit {
     if (this.editEventForm.get('notes').value !== null) {
       newEvent.notes = this.editEventForm.get('notes').value;
     }
-    console.log(newEvent);
+    this.editEvent.emit(newEvent);
   }
 
-  formatDatetime(timeInHours: number): string {
-    const eventDate = this.events[0].datetime;
-    return '';
+  formatDatetime(event: Event, timeInHours: number): string {
+    const eventDate = new Date(event.datetime);
+    eventDate.setHours(timeInHours);
+    eventDate.setMinutes(0);
+    eventDate.setSeconds(0);
+    eventDate.setMilliseconds(0);
+    return eventDate.toString();
   }
 
   setEditingEvent(id: number): void {

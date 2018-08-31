@@ -22,7 +22,11 @@
     </div>
     <div class="form-group">
     <h2>Select the time of the event: </h2>
-      <input placeholder="Event Name" formControlName="time">
+      <input placeholder="Event Time (in Hours Military Time)" formControlName="time">
+    </div>
+     <div class="form-group">
+      <h2>Enter the duration of the event: </h2>
+      <input placeholder="Event Duration (in whole hours)" formControlName="location">
     </div>
     <div class="form-group">
       <h2>Enter the location of the event: </h2>
@@ -32,6 +36,6 @@
       <h2>Enter any notes regarding the event:  </h2>
       <input placeholder="Event Name" formControlName="notes">
     </div>
-    <button class="create-event-button" [disabled]="editEventForm.valid === false">Create Event!</button>
+    <button class="create-event-button" [disabled]="editEventForm.valid === false">Confirm</button>
   </form>
 </div>
