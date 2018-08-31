@@ -8,3 +8,6 @@
         height: 200px;
         outline: 1px solid black;
     }
+    .date-cell.active{
+        background-color: #EEE;
+    }

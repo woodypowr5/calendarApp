@@ -7,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  private dateCells:  Date[] = Array(Constants.numDateCells).fill(null);
+  private constants = Constants;
+  private dateCells:  Date[] = Array(this.constants.numDateCells).fill(null);
   private currentDate: Date = new Date();
-  private activeDate: Date;
+  private activeDate: Date = new Date();
 
   constructor() { }
 
   ngOnInit() {
-    this.activeDate = this.currentDate;
+    console.log(this.activeDate);
     this.populateDateCells();
   }
 
@@ -24,7 +25,7 @@ export class CalendarComponent implements OnInit {
     return firstOfMonth.getDay();
   }
 
-  populateDateCells() {
+  populateDateCells(): void {
     this.clearDateCells();
     const offsetForMonth = this.findFirstDateOffset(this.activeDate) - 1;
     this.dateCells.map((cell, index) => {
@@ -44,29 +45,35 @@ export class CalendarComponent implements OnInit {
     return new Date(year, month, 0).getDate();
   }
 
-  clearDateCells() {
+  clearDateCells(): void {
     this.dateCells.map(cell => {
       cell = null;
     });
   }
 
-  nextMonth() {
+  nextMonth(): void {
     const currentMonth = this.activeDate.getMonth();
     if (currentMonth === 11) {
       this.activeDate.setMonth(0);
+      this.activeDate.setFullYear(this.activeDate.getFullYear() + 1);
     } else {
       this.activeDate.setMonth(this.activeDate.getMonth() + 1);
     }
     this.populateDateCells();
   }
 
-  prevMonth() {
+  prevMonth(): void {
     const currentMonth = this.activeDate.getMonth();
     if (currentMonth === 0) {
       this.activeDate.setMonth(11);
+      this.activeDate.setFullYear(this.activeDate.getFullYear() - 1);
     } else {
       this.activeDate.setMonth(this.activeDate.getMonth() - 1);
     }
     this.populateDateCells();
+  }
+
+  setActiveDate(index: number): void {
+    this.activeDate = this.dateCells[index];
   }
 }
