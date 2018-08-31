@@ -1,5 +1,8 @@
+import { EventService } from './../services/event.service';
 import { Constants } from './../data/constants';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Event } from '../types/event';
 
 @Component({
   selector: 'app-calendar',
@@ -12,11 +15,17 @@ export class CalendarComponent implements OnInit {
   private currentDate: Date = new Date();
   private activeDate: Date = new Date();
   private offsetForMonth: number;
+  private events: Event[] = [];
+  private eventSubscriptions: Subscription[] = [];
 
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
     this.populateDateCells();
+    this.eventSubscriptions.push(this.eventService.eventsChanged.subscribe(events => {
+      this.events = events;
+      console.log(events);
+    }));
   }
 
   findFirstDateOffset(date: Date): number {
@@ -75,5 +84,20 @@ export class CalendarComponent implements OnInit {
     if (this.activeDate[index] !== null) {
       this.activeDate = this.dateCells[index];
     }
+  }
+
+  dateHasEvents(date: Date): boolean {
+    for (let index = 0; index < this.events.length; index++) {
+      if (this.isSameDay(new Date(this.events[index].datetime), date)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isSameDay(date1: Date, date2: Date) {
+    return date1.getDate() === date2.getDate() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getFullYear() === date2.getFullYear();
   }
 }

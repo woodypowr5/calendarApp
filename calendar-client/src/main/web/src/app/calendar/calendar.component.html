@@ -22,6 +22,9 @@
         <div 
           class="calendar-date-text" 
         > {{ dateCells[i].getDate() }} </div>
+        <div class="event" *ngIf="dateHasEvents(dateCells[i])">
+          Event!
+        </div>
       </div>  
     </div>
   </div>

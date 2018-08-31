@@ -1,3 +1,4 @@
+import { MockData } from './../data/mockData';
 import { Event } from './../types/event';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -10,7 +11,9 @@ export class EventService {
   private events: Event[] = [];
   public eventsChanged: BehaviorSubject<Event[]> = new BehaviorSubject(null);
 
-  constructor() { }
+  constructor() {
+    this.eventsChanged.next(MockData.events);
+  }
 
   addEvent(event: Event): void {
     this.events.push(event);
