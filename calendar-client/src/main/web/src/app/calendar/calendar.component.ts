@@ -98,18 +98,24 @@ export class CalendarComponent implements OnInit {
     this.activeEvents = daysEvents;
   }
 
-  dateHasEvents(date: Date): boolean {
-    for (let index = 0; index < this.events.length; index++) {
-      if (this.isSameDay(new Date(this.events[index].datetime), date)) {
-        return true;
+  eventsForDate(date: Date): Event[] {
+    const daysEvents: Event[] = [];
+    this.events.map(event => {
+      if (this.isSameDay(new Date(event.datetime), date)) {
+        daysEvents.push(event);
       }
-    }
-    return false;
+    });
+    return daysEvents;
   }
 
   isSameDay(date1: Date, date2: Date) {
     return date1.getDate() === date2.getDate() &&
       date1.getMonth() === date2.getMonth() &&
       date1.getFullYear() === date2.getFullYear();
+  }
+
+  getFormattedTime(datetime: string): string {
+    const date = new Date(datetime);
+    return '' + date.getHours() + ':' + date.getMinutes();
   }
 }

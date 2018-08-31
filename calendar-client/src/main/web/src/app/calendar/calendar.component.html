@@ -20,10 +20,10 @@
           *ngIf="dateCells[i] !== null"
         >
           <div 
-            class="calendar-date-text" 
+            class="calendar-date-events" 
           > {{ dateCells[i].getDate() }} </div>
-          <div class="event" *ngIf="dateHasEvents(dateCells[i])">
-            Events Today
+          <div class="event-summary" *ngFor="let event of eventsForDate(dateCells[i])">
+            {{ event.name }} @ {{ getFormattedTime(event.datetime) }} 
           </div>
         </div>  
       </div>
