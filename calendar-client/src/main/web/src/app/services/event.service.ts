@@ -16,7 +16,8 @@ export class EventService {
     this.eventsChanged.next(MockData.events);
   }
 
-  addEvent(event: Event): void {
+  createEvent(event: Event): void {
+    console.log(event)
     this.events.push(event);
     this.eventsChanged.next(this.events);
   }

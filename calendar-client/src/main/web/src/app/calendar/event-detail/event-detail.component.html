@@ -1,4 +1,5 @@
 <h1>Event Details</h1>
+<button (click)="setAddingEvent(true)">Add New Event</button>
 <div 
   class="active-events"
   *ngFor="let activeEvent of events; let i = index;"
@@ -15,7 +16,7 @@
 
 <div class="edit-event-container" *ngIf="editingEvent !== null">
   <button (click)="closeEditingEvent()">close</button>
-  <form [formGroup]="editEventForm" (ngSubmit)="onSubmit()"> 
+  <form [formGroup]="editEventForm" (ngSubmit)="onSubmitEdit()"> 
     <div class="form-group">
       <h2>Enter the name of the event: </h2>
       <input placeholder="Event Name" formControlName="name">
@@ -26,7 +27,7 @@
     </div>
      <div class="form-group">
       <h2>Enter the duration of the event: </h2>
-      <input placeholder="Event Duration (in whole hours)" formControlName="location">
+      <input placeholder="Event Duration (in whole hours)" formControlName="duration">
     </div>
     <div class="form-group">
       <h2>Enter the location of the event: </h2>
@@ -37,5 +38,33 @@
       <input placeholder="Event Name" formControlName="notes">
     </div>
     <button class="create-event-button" [disabled]="editEventForm.valid === false">Confirm</button>
+  </form>
+</div>
+
+<div class="add-event-container" *ngIf="addingEvent === true">
+  <button (click)="closeAddingEvent()">close</button>
+  HELLO
+  <form [formGroup]="addEventForm" (ngSubmit)="onSubmitAdd()"> 
+    <div class="form-group">
+      <h2>Enter the name of the event: </h2>
+      <input placeholder="Event Name" formControlName="name">
+    </div>
+    <div class="form-group">
+    <h2>Select the time of the event: </h2>
+      <input placeholder="Event Time (in Hours Military Time)" formControlName="time">
+    </div>
+     <div class="form-group">
+      <h2>Enter the duration of the event: </h2>
+      <input placeholder="Event Duration (in whole hours)" formControlName="duration">
+    </div>
+    <div class="form-group">
+      <h2>Enter the location of the event: </h2>
+      <input placeholder="Event Location" formControlName="location">
+    </div>
+    <div class="form-group">
+      <h2>Enter any notes regarding the event:  </h2>
+      <input placeholder="Event Name" formControlName="notes">
+    </div>
+    <button class="create-event-button" [disabled]="addEventForm.valid === false">Confirm</button>
   </form>
 </div>

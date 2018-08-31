@@ -25,7 +25,6 @@ export class CalendarComponent implements OnInit {
     this.populateDateCells();
     this.eventSubscriptions.push(this.eventService.eventsChanged.subscribe(events => {
       this.events = events;
-      console.log(events);
     }));
   }
 
@@ -121,5 +120,9 @@ export class CalendarComponent implements OnInit {
 
   updateEvent(event: Event) {
     this.eventService.updateEvent(event);
+  }
+
+  createEvent(event: Event) {
+    this.eventService.createEvent(event);
   }
 }

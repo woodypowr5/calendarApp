@@ -31,8 +31,10 @@
   </div>
   <div class="event-detail-view">
     <app-event-detail
-    (editEvent)="updateEvent($event)"
+      (editEvent)="updateEvent($event)"
+      (addEvent)="createEvent($event)"
       [events]="activeEvents"
+      [datetime]="activeDate.toString()"
     >
     </app-event-detail>
 
