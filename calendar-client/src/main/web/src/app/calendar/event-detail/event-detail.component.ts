@@ -15,10 +15,11 @@ export class EventDetailComponent implements OnInit {
 
   constructor() {
     this.editEventForm = new FormGroup({
-      'name': new FormControl(null, [Validators.required]),
-      'time': new FormControl(null, [Validators.required]),
-      'location': new FormControl(null, [Validators.required]),
-      'notes': new FormControl(null)
+      'name': new FormControl(null),
+      'time': new FormControl(null),
+      'location': new FormControl(null),
+      'notes': new FormControl(null),
+      'duration': new FormControl(null)
     });
     // this.createEventForm = new FormGroup({
     //   'name': new FormControl(null, [Validators.required]),
@@ -31,7 +32,7 @@ export class EventDetailComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    const newEvent = {
+    const newEvent: Event = {
       id: this.editingEvent.id,
       name: this.editingEvent.name,
       datetime: this.editingEvent.datetime,
@@ -40,12 +41,24 @@ export class EventDetailComponent implements OnInit {
       duration: this.editingEvent.duration
     };
     const formattedDatetime = this.formatDatetime(this.editEventForm.get('time').value);
-    console.log(this.editEventForm.get('name'));
+    if (this.editEventForm.get('name').value !== null) {
+      newEvent.name = this.editEventForm.get('name').value;
+    }
+    if (this.editEventForm.get('location').value !== null) {
+      newEvent.location = this.editEventForm.get('location').value;
+    }
+    if (this.editEventForm.get('duration').value !== null) {
+      newEvent.duration = this.editEventForm.get('duration').value;
+    }
+    if (this.editEventForm.get('notes').value !== null) {
+      newEvent.notes = this.editEventForm.get('notes').value;
+    }
+    console.log(newEvent);
   }
 
   formatDatetime(timeInHours: number): string {
     const eventDate = this.events[0].datetime;
-    return "";
+    return '';
   }
 
   setEditingEvent(id: number): void {
