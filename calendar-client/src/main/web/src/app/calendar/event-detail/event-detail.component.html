@@ -10,4 +10,28 @@
     <h2 class="name">Time: {{ activeEvent.time }}</h2>
     <h2 class="name">Duration: {{ activeEvent.duration }} hours</h2>
   </div>
+  <button (click)="setEditingEvent(activeEvent.id)">Edit</button>
 </div>  
+
+<div class="edit-event-container" *ngIf="editingEvent !== null">
+  <button (click)="closeEditingEvent()">close</button>
+  <form [formGroup]="editEventForm" (ngSubmit)="onSubmit()"> 
+    <div class="form-group">
+      <h2>Enter the name of the event: </h2>
+      <input placeholder="Event Name" formControlName="name">
+    </div>
+    <div class="form-group">
+    <h2>Select the time of the event: </h2>
+      <input placeholder="Event Name" formControlName="time">
+    </div>
+    <div class="form-group">
+      <h2>Enter the location of the event: </h2>
+      <input placeholder="Event Location" formControlName="location">
+    </div>
+    <div class="form-group">
+      <h2>Enter any notes regarding the event:  </h2>
+      <input placeholder="Event Name" formControlName="notes">
+    </div>
+    <button class="create-event-button" [disabled]="editEventForm.valid === false">Create Event!</button>
+  </form>
+</div>
