@@ -11,11 +11,11 @@ export class CalendarComponent implements OnInit {
   private dateCells:  Date[] = Array(this.constants.numDateCells).fill(null);
   private currentDate: Date = new Date();
   private activeDate: Date = new Date();
+  private offsetForMonth: number;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.activeDate);
     this.populateDateCells();
   }
 
@@ -27,16 +27,16 @@ export class CalendarComponent implements OnInit {
 
   populateDateCells(): void {
     this.clearDateCells();
-    const offsetForMonth = this.findFirstDateOffset(this.activeDate) - 1;
+    this.offsetForMonth = this.findFirstDateOffset(this.activeDate) - 1;
+    const daysInMonth = this.daysInMonth(this.activeDate.getMonth() + 1, this.activeDate.getFullYear() + this.offsetForMonth);
     this.dateCells.map((cell, index) => {
-      console.log(this.daysInMonth(this.activeDate.getMonth(), this.activeDate.getFullYear() + offsetForMonth));
       if (
-        index - offsetForMonth < 1 ||
-        index - offsetForMonth > this.daysInMonth(this.activeDate.getMonth(), this.activeDate.getFullYear() + offsetForMonth)
+        index - this.offsetForMonth < 1 ||
+        index - this.offsetForMonth > daysInMonth
       ) {
         this.dateCells[index] = null;
       } else {
-        this.dateCells[index] = new Date(this.activeDate.getFullYear(), this.activeDate.getMonth(), index - offsetForMonth);
+        this.dateCells[index] = new Date(this.activeDate.getFullYear(), this.activeDate.getMonth(), index - this.offsetForMonth);
       }
     });
   }
@@ -46,9 +46,7 @@ export class CalendarComponent implements OnInit {
   }
 
   clearDateCells(): void {
-    this.dateCells.map(cell => {
-      cell = null;
-    });
+    this.dateCells = Array(this.constants.numDateCells).fill(null);
   }
 
   nextMonth(): void {
@@ -74,6 +72,8 @@ export class CalendarComponent implements OnInit {
   }
 
   setActiveDate(index: number): void {
-    this.activeDate = this.dateCells[index];
+    if (this.activeDate[index] !== null) {
+      this.activeDate = this.dateCells[index];
+    }
   }
 }

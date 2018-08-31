@@ -1,9 +1,10 @@
+  {{ curentDate }}
+  
   <div class="header">
     <button (click)="prevMonth()">Prev Month</button>
-    {{ activeDate }}
-   <!-- {{ constants.months[activeDate.getMonth()] }}
+    {{ constants.months[activeDate.getMonth()] }}
     {{ activeDate.getDate() }}
-    {{ activeDate.getFullYear() }} -->
+    {{ activeDate.getFullYear() }}
     <button (click)="nextMonth()">Next Month</button>
   </div>  
 
@@ -11,10 +12,17 @@
     <div 
       class="date-cell"
       *ngFor="let dateCell of dateCells; let i = index;" 
-      [ngClass]="{'active': activeDate.getDate() + 2 === i}"
-      (click)="setActiveDate(i)"
     >
-      <div class="calendar-date" *ngIf="dateCells[i] !== null"> {{ dateCells[i].getDate() }} </div>
+      <div 
+        class="calendar-date"
+        (click)="setActiveDate(i)"
+        [ngClass]="{'active': activeDate.getDate() + offsetForMonth  === i, 'today': currentDate.getDate() + offsetForMonth  === i}" 
+        *ngIf="dateCells[i] !== null"
+      >
+        <div 
+          class="calendar-date-text" 
+        > {{ dateCells[i].getDate() }} </div>
+      </div>  
     </div>
   </div>
 
