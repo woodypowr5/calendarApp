@@ -26,18 +26,40 @@ export class EventService {
 
   createEvent(event: Event): void {
     console.log(event)
-    this.events.push(event);
-    this.eventsChanged.next(this.events);
+    const request = this.http.put('http://localhost:8080/rest/event/', {
+      event: event
+    })
+    .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log('An Error occured');
+      }
+    );
+    this.fetchEvents();
   }
 
   updateEvent(event: Event): void {
-    this.events.map((currentEvent, index) => {
-      if (currentEvent.id === event.id) {
-        this.events.splice(index, 1);
-        this.events.push(event);
+    const request = this.http.post('http://localhost:8080/rest/event/' + event.id, {
+      event: event
+    })
+    .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log('An Error occured');
       }
-    });
-    this.eventsChanged.next(this.events);
+    );
+    this.fetchEvents();
+    // this.events.map((currentEvent, index) => {
+    //   if (currentEvent.id === event.id) {
+    //     this.events.splice(index, 1);
+    //     this.events.push(event);
+    //   }
+    // });
+    // this.eventsChanged.next(this.events);
   }
 
   deleteEvent(event: Event): void {
@@ -47,5 +69,6 @@ export class EventService {
       }
     });
     this.eventsChanged.next(this.events);
+    this.fetchEvents();
   }
 }
