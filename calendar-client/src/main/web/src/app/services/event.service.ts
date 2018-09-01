@@ -43,7 +43,8 @@ export class EventService {
   }
 
   updateEvent(event: Event): void {
-    const request = this.http.post('http://localhost:8080/rest/event/' + event.id, {
+    const request = this.http.post('http://localhost:8080/rest/event', {
+      id: event.id,
       name: event.name,
       location: event.location,
       datetime: new Date(event.datetime),
