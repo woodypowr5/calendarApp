@@ -63,12 +63,17 @@ export class EventService {
   }
 
   deleteEvent(event: Event): void {
-    this.events.map((currentEvent, index) => {
-      if (currentEvent.id === event.id) {
-        this.events.splice(index, 1);
+    const request = this.http.delete('http://localhost:8080/rest/event/' + event.id, {
+
+    })
+    .subscribe(
+      res => {
+        this.fetchEvents();
+        console.log(res);
+      },
+      err => {
+        console.log('An Error occured');
       }
-    });
-    this.eventsChanged.next(this.events);
-    this.fetchEvents();
+    );
   }
 }

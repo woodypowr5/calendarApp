@@ -12,6 +12,7 @@ export class EventDetailComponent implements OnInit {
   @Input() events: Event[];
   @Output() addEvent: EventEmitter<Event> = new EventEmitter();
   @Output() editEvent: EventEmitter<Event> = new EventEmitter();
+  @Output() deleteEvent: EventEmitter<Event> = new EventEmitter();
   private editEventForm: FormGroup;
   private addEventForm: FormGroup;
   private editingEvent: Event = null;
@@ -36,8 +37,7 @@ export class EventDetailComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmitEdit() {
-    // this.editingEvent = null;
+  onSubmitEdit(): void {
     const newEvent: Event = {
       id: this.editingEvent.id,
       name: this.editingEvent.name,
@@ -65,7 +65,7 @@ export class EventDetailComponent implements OnInit {
     this.editEvent.emit(newEvent);
   }
 
-  onSubmitAdd() {
+  onSubmitAdd(): void {
     this.addingEvent = false;
     const newEvent: Event = {
       id: null,
@@ -91,6 +91,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   setEditingEvent(id: number): void {
+    this.addingEvent = false;
     this.events.map(event => {
       if (event.id === id) {
         this.editingEvent = event;
@@ -98,15 +99,20 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
-  setAddingEvent(value: boolean) {
+  setAddingEvent(value: boolean): void {
+    this.editingEvent = null;
     this.addingEvent = value;
   }
 
-  closeEditingEvent() {
+  closeEditingEvent(): void {
     this.editingEvent = null;
   }
 
-  closeAddingEvent() {
+  closeAddingEvent(): void {
     this.addingEvent = false;
+  }
+
+  removeEvent(event: Event): void {
+    this.deleteEvent.emit(event);
   }
 }

@@ -1,0 +1,4 @@
+.edit-event-container, .add-event-container{
+    outline: 2px solid #DDD;
+    padding: 20px;
+}

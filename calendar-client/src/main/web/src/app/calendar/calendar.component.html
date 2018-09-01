@@ -1,4 +1,3 @@
-Events: {{ events.length }}
 <div class="calendar-display-container">  
   <div class="calendar-view">
     <div class="header">
@@ -17,7 +16,7 @@ Events: {{ events.length }}
         <div 
           class="calendar-date"
           (click)="setActiveDate(i, dateCell)"
-          [ngClass]="{'active': activeDate.getDate() + offsetForMonth  === i, 'today': currentDate.getDate() + offsetForMonth  === i}" 
+          [ngClass]="{'active': activeDate.getDate() + offsetForMonth  === i, 'today': currentDate.getDate() + offsetForMonth  === i && currentDate.getMonth() === dateCell.getMonth() && currentDate.getFullYear() === dateCell.getFullYear() }" 
           *ngIf="dateCells[i] !== null"
         >
           <div 
@@ -34,6 +33,7 @@ Events: {{ events.length }}
     <app-event-detail
       (editEvent)="updateEvent($event)"
       (addEvent)="createEvent($event)"
+      (deleteEvent)="deleteEvent($event)"
       [events]="activeEvents"
       [datetime]="activeDate.toString()"
     >

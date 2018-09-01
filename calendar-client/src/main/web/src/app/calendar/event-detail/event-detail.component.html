@@ -7,15 +7,16 @@
   <div class="details">
     <h2 class="name">Name: {{ activeEvent.name }}</h2>
     <h2 class="name">Location: {{ activeEvent.location }}</h2>
-    <h2 class="name">Date: {{ activeEvent.date }}</h2>
-    <h2 class="name">Time: {{ activeEvent.time }}</h2>
+    <h2 class="name">Date: {{ activeEvent.datetime }}</h2>
     <h2 class="name">Duration: {{ activeEvent.duration }} hours</h2>
   </div>
   <button (click)="setEditingEvent(activeEvent.id)">Edit</button>
+  <button (click)="removeEvent(activeEvent)">Delete</button>
 </div>  
 
 <div class="edit-event-container" *ngIf="editingEvent !== null">
   <button (click)="closeEditingEvent()">close</button>
+  <h1>Edit Event</h1>
   <form [formGroup]="editEventForm" (ngSubmit)="onSubmitEdit()"> 
     <div class="form-group">
       <h2>Enter the name of the event: </h2>
@@ -43,6 +44,7 @@
 
 <div class="add-event-container" *ngIf="addingEvent === true">
   <button (click)="closeAddingEvent()">close</button>
+  <h1>Create New Event</h1>
   <form [formGroup]="addEventForm" (ngSubmit)="onSubmitAdd()"> 
     <div class="form-group">
       <h2>Enter the name of the event: </h2>

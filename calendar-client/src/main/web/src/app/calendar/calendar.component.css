@@ -7,6 +7,11 @@
         border-right: 4px solid #EEE;
         padding: 20px;
     }
+        .header{
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+        }
     .event-detail-view{
         width: 40%;
         flex-shrink: 2;
@@ -28,7 +33,6 @@
                 }
                 
                 .calendar-date.active{
-                    /* background-color: #EEE; */
                     background-color: #EEE;
                 }
                 .calendar-date.today{

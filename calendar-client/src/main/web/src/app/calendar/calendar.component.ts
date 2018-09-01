@@ -68,7 +68,6 @@ export class CalendarComponent implements OnInit {
     } else {
       this.activeDate.setMonth(this.activeDate.getMonth() + 1);
     }
-    
     this.populateDateCells();
   }
 
@@ -90,7 +89,7 @@ export class CalendarComponent implements OnInit {
     this.setActiveEvents(date);
   }
 
-  setActiveEvents(date: Date) {
+  setActiveEvents(date: Date): void {
     const daysEvents: Event[] = [];
     this.events.map(event => {
       if (this.isSameDay(new Date(event.datetime), date)) {
@@ -110,7 +109,7 @@ export class CalendarComponent implements OnInit {
     return daysEvents;
   }
 
-  isSameDay(date1: Date, date2: Date) {
+  isSameDay(date1: Date, date2: Date): boolean {
     return date1.getDate() === date2.getDate() &&
       date1.getMonth() === date2.getMonth() &&
       date1.getFullYear() === date2.getFullYear();
@@ -121,14 +120,20 @@ export class CalendarComponent implements OnInit {
     return '' + date.getHours();
   }
 
-  updateEvent(event: Event) {
+  updateEvent(event: Event): void {
     this.eventService.updateEvent(event);
     this.eventService.fetchEvents();
     this.populateDateCells();
   }
 
-  createEvent(event: Event) {
+  createEvent(event: Event): void {
     this.eventService.createEvent(event);
+    this.eventService.fetchEvents();
+    this.populateDateCells();
+  }
+
+  deleteEvent(event: Event): void {
+    this.eventService.deleteEvent(event);
     this.eventService.fetchEvents();
     this.populateDateCells();
   }
