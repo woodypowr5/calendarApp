@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EventService } from './services/event.service';
 import { EventDetailComponent } from './calendar/event-detail/event-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { EventDetailComponent } from './calendar/event-detail/event-detail.compo
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [EventService],
   bootstrap: [AppComponent]

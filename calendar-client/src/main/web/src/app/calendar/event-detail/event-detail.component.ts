@@ -37,6 +37,7 @@ export class EventDetailComponent implements OnInit {
   ngOnInit() {}
 
   onSubmitEdit() {
+    this.editingEvent = null; 
     const newEvent: Event = {
       id: this.editingEvent.id,
       name: this.editingEvent.name,
@@ -65,6 +66,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   onSubmitAdd() {
+    this.addingEvent = false;
     const newEvent: Event = {
       id: null,
       name: this.addEventForm.get('name').value,

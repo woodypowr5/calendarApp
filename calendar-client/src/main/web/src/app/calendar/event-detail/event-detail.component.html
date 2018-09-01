@@ -43,7 +43,6 @@
 
 <div class="add-event-container" *ngIf="addingEvent === true">
   <button (click)="closeAddingEvent()">close</button>
-  HELLO
   <form [formGroup]="addEventForm" (ngSubmit)="onSubmitAdd()"> 
     <div class="form-group">
       <h2>Enter the name of the event: </h2>
