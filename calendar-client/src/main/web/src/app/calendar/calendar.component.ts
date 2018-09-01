@@ -25,7 +25,9 @@ export class CalendarComponent implements OnInit {
     this.populateDateCells();
     this.eventSubscriptions.push(this.eventService.eventsChanged.subscribe(events => {
       this.events = events;
+      this.populateDateCells();
     }));
+    this.eventService.fetchEvents();
   }
 
   findFirstDateOffset(date: Date): number {
@@ -66,6 +68,7 @@ export class CalendarComponent implements OnInit {
     } else {
       this.activeDate.setMonth(this.activeDate.getMonth() + 1);
     }
+    
     this.populateDateCells();
   }
 
@@ -120,9 +123,13 @@ export class CalendarComponent implements OnInit {
 
   updateEvent(event: Event) {
     this.eventService.updateEvent(event);
+    this.eventService.fetchEvents();
+    this.populateDateCells();
   }
 
   createEvent(event: Event) {
     this.eventService.createEvent(event);
+    this.eventService.fetchEvents();
+    this.populateDateCells();
   }
 }

@@ -37,7 +37,7 @@ export class EventDetailComponent implements OnInit {
   ngOnInit() {}
 
   onSubmitEdit() {
-    this.editingEvent = null; 
+    // this.editingEvent = null;
     const newEvent: Event = {
       id: this.editingEvent.id,
       name: this.editingEvent.name,

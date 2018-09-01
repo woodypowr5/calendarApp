@@ -13,53 +13,52 @@ export class EventService {
   public eventsChanged: BehaviorSubject<Event[]> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {
-    this.eventsChanged.next(MockData.events);
     this.fetchEvents();
   }
 
   fetchEvents() {
     this.http.get<Event[]>('http://localhost:8080/rest/events').subscribe( data => {
       this.events = data;
+      this.eventsChanged.next(this.events);
     });
-    this.eventsChanged.next(this.events);
   }
 
   createEvent(event: Event): void {
-    console.log(event)
     const request = this.http.put('http://localhost:8080/rest/event/', {
-      event: event
+      name: event.name,
+      location: event.location,
+      datetime: new Date(event.datetime),
+      duration: event.duration,
+      notes: event.notes
     })
     .subscribe(
       res => {
         console.log(res);
+        this.fetchEvents();
       },
       err => {
         console.log('An Error occured');
       }
     );
-    this.fetchEvents();
   }
 
   updateEvent(event: Event): void {
     const request = this.http.post('http://localhost:8080/rest/event/' + event.id, {
-      event: event
+      name: event.name,
+      location: event.location,
+      datetime: new Date(event.datetime),
+      duration: event.duration,
+      notes: event.notes
     })
     .subscribe(
       res => {
+        this.fetchEvents();
         console.log(res);
       },
       err => {
         console.log('An Error occured');
       }
     );
-    this.fetchEvents();
-    // this.events.map((currentEvent, index) => {
-    //   if (currentEvent.id === event.id) {
-    //     this.events.splice(index, 1);
-    //     this.events.push(event);
-    //   }
-    // });
-    // this.eventsChanged.next(this.events);
   }
 
   deleteEvent(event: Event): void {
